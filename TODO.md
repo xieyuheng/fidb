@@ -1,10 +1,3 @@
-开启新的 fidb-next -- 这次做成 library 而不是 app
-```
-git remote add origin git@github.com:fidb-official/fidb-next.git
-git push -u origin master
-```
-setup git
-setup typescript
 撰写新计划书
 - 应该用 OOP 的方式来实现基础数据层的 API，
   因为 Db 显然是一个正经的 interface，FiDB 是它的自类型。
