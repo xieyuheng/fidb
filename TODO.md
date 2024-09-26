@@ -10,3 +10,8 @@
 [examples] x-calendar
 [examples] x-blog -- twitter-like -- user has friends
 - 这里主要是要实现评论功能。
+
+# db
+
+[db] `Database` interface
+[db] `FiDB` class
