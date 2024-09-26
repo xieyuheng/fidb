@@ -1,6 +1,4 @@
 撰写新计划书
-- 应该用 OOP 的方式来实现基础数据层的 API，
-  因为 Db 显然是一个正经的 interface，FiDB 是它的自类型。
 - 用 double linked 而不是 path-based permission
   - 允许不一致性，不一致性在 UI 上显示出来，
     比如一个 mimor 对某个 user 取消了权限，
