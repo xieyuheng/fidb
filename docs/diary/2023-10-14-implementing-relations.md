@@ -49,6 +49,9 @@ Just like how the recall feature of mimor is implemented:
 users/{user}/recall/{src-hash}/index.json
 ```
 
+- [2034-10-08] 如果使用 flat directory structure，
+  就不会有 `src-hash` 这种需要 hash path 的问题了。
+
 # Limitation
 
 Note that, we can only express relations between something with user.
@@ -74,9 +77,13 @@ and amend the double-link if it is broken.
 We do not need to use index to get all the users a user is following,
 or all the followers of a user.
 
-both direction of a relation must be explicitly named.
+Both direction of a relation must be explicitly named.
 
 # Motivating constraint
 
 The motivating constraint of the idea of double-link,
 is the fact that we are using path pattern to represent permissions.
+
+- [2034-10-08] 现在看来，用 path pattern
+  来实现 permissions 并不是个好方案，
+  但是 double-link 仍然是 implementing relations 的好方案。
