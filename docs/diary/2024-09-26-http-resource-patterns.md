@@ -23,4 +23,4 @@ date: 2024-09-26
   > in which every request is sent by a user or a guest.
 
   可能需要再次回顾旧笔记：2023-10-14-implementing-relations.md
-  并且撰写一写到新笔记。
+  并且转写一写到新笔记。
