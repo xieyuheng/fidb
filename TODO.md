@@ -1,29 +1,20 @@
-# database
+# fidb
 
-[database] `FiDb` -- `create`
-[database] `FiDb` -- `delete`
-[database] `FiDb` -- `metadata`
-[database] `FiDb` -- `getOrFail`
-[database] `FiDb` -- `get`
-[database] `FiDb` -- `has`
-[database] `FiDb` -- `patch`
-[database] `FiDb` -- `put`
+[fidb] `FiDb` -- `create`
+[fidb] `FiDb` -- `delete`
+[fidb] `FiDb` -- `metadata`
+[fidb] `FiDb` -- `getOrFail`
+[fidb] `FiDb` -- `get`
+[fidb] `FiDb` -- `has`
+[fidb] `FiDb` -- `patch`
+[fidb] `FiDb` -- `put`
+[fidb] `FiDb` -- `all`
+[fidb] `FiDb` -- `find`
 
-# examples
+# later
 
-[examples] mimor
+还是用回 nodejs，比较稳定一点
 
-- 要能 publish 到稳定的 url
-- 别忘了 recall，现在的实现方式也不好。
-  [examples] mimorhub -- 带有社交功能 -- 也许这个 app 足够一般了
-- like 功能
-- follow 功能 -- `following` & `followed-by` -- 这里如何处理权限问题？
-  [examples] pomodoro
-  [examples] x-calendar
-  [examples] x-blog -- twitter-like -- user has friends
-- 这里主要是要实现评论功能。
+- 尝试用 node:http 实现 bun 的 serve API
 
-# db
-
-[db] `Database` interface
-[db] `FiDB` class
+尝试用 node:http 实现 bun 的 serve API
