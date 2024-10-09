@@ -11,8 +11,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test": "bun test",
-    "test:watch": "bun test --watch",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
     "format": "prettier src --write"
   },
   "dependencies": {
@@ -26,7 +26,6 @@
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
-    "@types/bun": "latest",
     "@types/bcrypt": "^5.0.2",
     "@types/detect-port": "^1.3.5",
     "@types/micromatch": "^4.0.9",

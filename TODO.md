@@ -13,8 +13,4 @@
 
 # later
 
-还是用回 nodejs，比较稳定一点
-
-- 尝试用 node:http 实现 bun 的 serve API
-
 尝试用 node:http 实现 bun 的 serve API

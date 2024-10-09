@@ -1,27 +1,15 @@
 {
   "include": ["src"],
   "compilerOptions": {
-    // Transpile
-    "outDir": "lib",
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Enable latest features
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "allowJs": true,
-
-    // Bundler mode
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
-
-    // Best practices
+    "lib": ["esnext", "dom"],
+    "module": "node16",
+    "target": "es2017",
     "strict": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "outDir": "lib"
   }
 }
