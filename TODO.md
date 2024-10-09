@@ -1,8 +1,14 @@
 # database
 
 [database] `FiDb` implements `Db`
-[database] `FiDb` -- `get(id)`
+[database] `FiDb` -- `create`
+[database] `FiDb` -- `delete`
 [database] `FiDb` -- `metadata`
+[database] `FiDb` -- `getOrFail`
+[database] `FiDb` -- `get`
+[database] `FiDb` -- `has`
+[database] `FiDb` -- `patch`
+[database] `FiDb` -- `put`
 
 # examples
 

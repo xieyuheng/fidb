@@ -14,6 +14,7 @@ export type Metadata = {
 export interface Db {
   create(id: Id, data: Data): Promise<void>
   delete(id: Id, options: { revision: string }): Promise<void>
+  metadata(id: Id): Promise<Metadata>
   getOrFail(id: Id): Promise<Data>
   get(id: Id): Promise<Data | undefined>
   has(id: Id): Promise<boolean>
