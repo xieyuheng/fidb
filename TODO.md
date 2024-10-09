@@ -1,20 +1,18 @@
-看以下 bun 的 API：https://bun.sh/docs/api/http
+# database
 
-- 如果能避免用 node:http 中愚蠢的的
+[database] `Db` interface
 
-  ```typescript
-  request: Http.IncomingMessage
-  response: Http.ServerResponse
-  ```
+- create
+- delete
+- getOrFail
+- get
+- has
+- patch
+- put
 
-  而是使用 Web API 的标准，
-
-  ```typescript
-  request: Request
-  response: Response
-  ```
-
-  那将是极好的。
+[database] `FiDb` implements `Db`
+[database] `FiDb` -- `get(id)`
+[database] `FiDb` -- `metadata`
 
 # examples
 
