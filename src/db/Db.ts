@@ -1,11 +1,22 @@
 import type { JsonObject } from "../utils/Json.js"
 
+export type Id = `${string}/${string}`
+
+export type Data = JsonObject
+
+export type Metadata = {
+  id: Id
+  revision: string
+  createdAt: number
+  updatedAt: number
+}
+
 export interface Db {
-  create(id: string, data: JsonObject): Promise<void>
-  delete(id: string, options: { revision: string }): Promise<void>
-  getOrFail(id: string): Promise<JsonObject>
-  get(id: string): Promise<JsonObject | undefined>
-  has(id: string): Promise<boolean>
-  patch(id: string, data: JsonObject): Promise<JsonObject>
-  put(id: string, data: JsonObject): Promise<JsonObject>
+  create(id: Id, data: Data): Promise<void>
+  delete(id: Id, options: { revision: string }): Promise<void>
+  getOrFail(id: Id): Promise<Data>
+  get(id: Id): Promise<Data | undefined>
+  has(id: Id): Promise<boolean>
+  patch(id: Id, data: Data): Promise<Data>
+  put(id: Id, data: Data): Promise<Data>
 }
