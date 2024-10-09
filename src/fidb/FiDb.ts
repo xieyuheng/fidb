@@ -1,7 +1,16 @@
 import type { Data, Db, Id, Metadata } from "../db/index.js"
 
+export type FiDbConfig = {
+  directory: string
+}
+
 export class FiDb implements Db {
+  constructor(public config: FiDbConfig){
+  }
+
   async create(id: Id, data: Data): Promise<void> {
+    const [datasetName, dataId] = id.split("/")
+    this.config.directory
     throw new Error()
   }
 

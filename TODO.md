@@ -1,5 +1,8 @@
 # fidb
 
+[fidb] `resolveDataPath`
+[fidb] `writeData`
+
 [fidb] `FiDb` -- `create`
 [fidb] `FiDb` -- `delete`
 [fidb] `FiDb` -- `metadata`
