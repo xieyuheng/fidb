@@ -1,15 +1,6 @@
 # database
 
-[database] `Db` interface
-
-- create
-- delete
-- getOrFail
-- get
-- has
-- patch
-- put
-
+[database] `Data` & `Metadata`
 [database] `FiDb` implements `Db`
 [database] `FiDb` -- `get(id)`
 [database] `FiDb` -- `metadata`

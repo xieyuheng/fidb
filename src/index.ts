@@ -1,1 +1,1 @@
-export const x: number = 1
+export * from "./db/index.js"
