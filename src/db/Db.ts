@@ -5,7 +5,6 @@ export type Id = `${string}/${string}`
 export type Data = JsonObject
 
 export type Metadata = {
-  id: Id
   revision: string
   createdAt: number
   updatedAt: number
