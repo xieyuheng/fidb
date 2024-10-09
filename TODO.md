@@ -1,6 +1,5 @@
 # database
 
-[database] `FiDb` implements `Db`
 [database] `FiDb` -- `create`
 [database] `FiDb` -- `delete`
 [database] `FiDb` -- `metadata`
