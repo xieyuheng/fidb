@@ -1,16 +1,25 @@
+import { join } from "node:path"
 import type { Data, Db, Id, Metadata } from "../db/index.js"
+import { resolvePath } from "./resolvePath.js"
 
 export type FiDbConfig = {
   directory: string
 }
 
 export class FiDb implements Db {
-  constructor(public config: FiDbConfig){
+  constructor(public config: FiDbConfig) {}
+
+  private resolveIdPath(id: Id): string {
+    const [datasetName, dataId] = id.split("/")
+    return resolvePath(
+      this.config.directory,
+      join(datasetName, "datasets", dataId),
+    )
   }
 
   async create(id: Id, data: Data): Promise<void> {
     const [datasetName, dataId] = id.split("/")
-    this.config.directory
+    join(this.resolveIdPath(id), "data.json")
     throw new Error()
   }
 

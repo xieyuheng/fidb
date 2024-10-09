@@ -1,7 +1,6 @@
 # fidb
 
-[fidb] `resolveDataPath`
-[fidb] `writeData`
+[fidb] `FiDb` -- `writeData`
 
 [fidb] `FiDb` -- `create`
 [fidb] `FiDb` -- `delete`
