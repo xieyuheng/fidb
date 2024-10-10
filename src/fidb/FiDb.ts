@@ -1,6 +1,10 @@
 import { join } from "path"
 import type { Data, Db, Id } from "../db/index.js"
+import { AlreadyExists } from "../errors/AlreadyExists.js"
+import { NotFound } from "../errors/NotFound.js"
 import type { JsonObject } from "../utils/Json.js"
+import { isErrnoException } from "../utils/node/isErrnoException.js"
+import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
 import { resolvePath } from "./resolvePath.js"
 
@@ -20,12 +24,18 @@ export class FiDb implements Db {
   }
 
   private async writeData(id: Id, data: Data): Promise<void> {
-    await writeJson(join(this.resolveIdPath(id), "data.json"), data)
+    const path = join(this.resolveIdPath(id), "data.json")
+    await writeJson(path, data)
+  }
+
+  private async readData(id: Id): Promise<Data> {
+    const path = join(this.resolveIdPath(id), "data.json")
+    return (await readJsonObject(path)) as Data
   }
 
   async create(id: Id, input: JsonObject): Promise<Data> {
     if (await this.has(id)) {
-      throw new Error(`Already exists, id: ${id}`)
+      throw new AlreadyExists(`Already exists, id: ${id}`)
     }
 
     const data = {
@@ -44,7 +54,15 @@ export class FiDb implements Db {
   }
 
   async getOrFail(id: Id): Promise<Data> {
-    throw new Error()
+    try {
+      return await this.readData(id)
+    } catch (error) {
+      if (isErrnoException(error) && error.code === "ENOENT") {
+        throw new NotFound(`id: ${id}`)
+      }
+
+      throw error
+    }
   }
 
   async get(id: Id): Promise<Data | undefined> {

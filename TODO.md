@@ -1,10 +1,12 @@
 # fidb
 
-[fidb] `FiDb` -- `delete`
-[fidb] `FiDb` -- `metadata`
-[fidb] `FiDb` -- `getOrFail`
 [fidb] `FiDb` -- `get`
 [fidb] `FiDb` -- `has`
+
+[fidb] crud.test.ts
+
+[fidb] `FiDb` -- `delete`
+
 [fidb] `FiDb` -- `patch`
 [fidb] `FiDb` -- `put`
 [fidb] `FiDb` -- `all`
