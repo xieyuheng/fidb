@@ -1,6 +1,5 @@
 # fidb
 
-[fidb] crud.test.ts -- create & get
 [fidb] `FiDb` -- `delete`
 [fidb] crud.test.ts -- delete
 [fidb] `FiDb` -- `patch`

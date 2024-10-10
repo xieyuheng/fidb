@@ -4,6 +4,10 @@ import { createTestFiDb } from "./createTestFiDb.js"
 
 test("fidb / crud", async () => {
   const db = await createTestFiDb()
-  console.log("hi")
-  assert(true)
+
+  const data = await db.create("users/xieyuheng", {
+    name: "Xie Yuheng",
+  })
+
+  assert.deepStrictEqual(data, await db.get("users/xieyuheng"))
 })

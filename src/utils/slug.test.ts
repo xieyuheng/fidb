@@ -4,6 +4,8 @@ import { slug } from "./slug.js"
 
 // prettier-ignore
 test("slug", () => {
+  assert.equal(slug("10:59"), '10:59')
+
   const target = "構造-the-constructivization-of-mathematics"
 
   assert.equal(slug("構造 / The constructivization of mathematics"), target)
