@@ -54,4 +54,10 @@ test("fidb / crud", async () => {
       age: undefined,
     }),
   )
+
+  await db.put("users/xyh", {
+    name: "XYH",
+  })
+
+  assert((await Array.fromAsync(db.all("users"))).length === 2)
 })

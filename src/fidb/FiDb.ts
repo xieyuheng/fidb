@@ -3,10 +3,11 @@ import { join } from "path"
 import type { Data, Db, Id } from "../db/index.js"
 import { AlreadyExists } from "../errors/AlreadyExists.js"
 import { NotFound } from "../errors/NotFound.js"
-import type { JsonObject } from "../utils/Json.js"
+import type { Json, JsonObject } from "../utils/Json.js"
 import { isErrnoException } from "../utils/node/isErrnoException.js"
 import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
+import { objectMatchProperties } from "../utils/objectMatchProperties.js"
 import { objectMergeProperties } from "../utils/objectMergeProperties.js"
 import { resolvePath } from "./resolvePath.js"
 
@@ -17,7 +18,11 @@ export type FiDbConfig = {
 export class FiDb implements Db {
   constructor(public config: FiDbConfig) {}
 
-  private resolveIdPath(id: Id): string {
+  private resolveDatasetPath(datasetName: string): string {
+    return resolvePath(this.config.directory, join(datasetName, "datasets"))
+  }
+
+  private resolveDataPath(id: Id): string {
     const [datasetName, dataId] = id.split("/")
     return resolvePath(
       this.config.directory,
@@ -26,12 +31,12 @@ export class FiDb implements Db {
   }
 
   private async writeData(id: Id, data: Data): Promise<void> {
-    const path = join(this.resolveIdPath(id), "data.json")
+    const path = join(this.resolveDataPath(id), "data.json")
     await writeJson(path, data)
   }
 
   private async readData(id: Id): Promise<Data> {
-    const path = join(this.resolveIdPath(id), "data.json")
+    const path = join(this.resolveDataPath(id), "data.json")
     return (await readJsonObject(path)) as Data
   }
 
@@ -52,7 +57,7 @@ export class FiDb implements Db {
   }
 
   async delete(id: Id): Promise<void> {
-    await fs.rm(this.resolveIdPath(id), {
+    await fs.rm(this.resolveDataPath(id), {
       recursive: true,
       force: true,
     })
@@ -120,5 +125,32 @@ export class FiDb implements Db {
 
     await this.writeData(id, data)
     return data
+  }
+
+  async *all(
+    datasetName: string,
+    options?: {
+      properties: Record<string, Json>
+    },
+  ): AsyncIterable<Data> {
+    try {
+      const dir = await fs.opendir(this.resolveDatasetPath(datasetName), {
+        bufferSize: 1024, // default: 32
+      })
+
+      for await (const dirEntry of dir) {
+        const data = await this.get(`${datasetName}/${dirEntry.name}`)
+        if (
+          data !== undefined &&
+          objectMatchProperties(data, options?.properties || {})
+        ) {
+          yield data
+        }
+      }
+    } catch (error) {
+      if (!(isErrnoException(error) && error.code === "ENOENT")) {
+        throw error
+      }
+    }
   }
 }

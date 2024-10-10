@@ -1,4 +1,4 @@
-import type { JsonObject } from "../utils/Json.js"
+import type { Json, JsonObject } from "../utils/Json.js"
 
 export type Id = `${string}/${string}`
 
@@ -18,4 +18,8 @@ export interface Db {
   has(id: Id): Promise<boolean>
   patch(id: Id, input: JsonObject): Promise<Data>
   put(id: Id, input: JsonObject): Promise<Data>
+  all(
+    datasetName: string,
+    options?: { properties: Record<string, Json> },
+  ): AsyncIterable<Data>
 }
