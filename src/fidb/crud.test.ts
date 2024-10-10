@@ -1,5 +1,6 @@
 import assert from "node:assert"
 import { test } from "node:test"
+import { objectMatchProperties } from "../utils/objectMatchProperties.js"
 import { createTestFiDb } from "./createTestFiDb.js"
 
 test("fidb / crud", async () => {
@@ -8,14 +9,49 @@ test("fidb / crud", async () => {
   assert.deepStrictEqual(await db.has("users/xieyuheng"), false)
   assert.deepStrictEqual(await db.get("users/xieyuheng"), undefined)
 
-  const data = await db.create("users/xieyuheng", {
+  await db.create("users/xieyuheng", {
     name: "Xie Yuheng",
   })
 
-  assert.deepStrictEqual(await db.has("users/xieyuheng"), true)
-  assert.deepStrictEqual(await db.get("users/xieyuheng"), data)
+  assert(await db.has("users/xieyuheng"))
+  assert(
+    objectMatchProperties(await db.getOrFail("users/xieyuheng"), {
+      name: "Xie Yuheng",
+    }),
+  )
 
   await db.delete("users/xieyuheng")
+  assert((await db.get("users/xieyuheng")) === undefined)
 
-  assert.deepStrictEqual(await db.get("users/xieyuheng"), undefined)
+  await db.put("users/xieyuheng", {
+    name: "谢宇恒",
+  })
+
+  assert(
+    objectMatchProperties(await db.getOrFail("users/xieyuheng"), {
+      name: "谢宇恒",
+    }),
+  )
+
+  await db.patch("users/xieyuheng", {
+    age: 100,
+  })
+
+  assert(
+    objectMatchProperties(await db.getOrFail("users/xieyuheng"), {
+      name: "谢宇恒",
+      age: 100,
+    }),
+  )
+
+  await db.put("users/xieyuheng", {
+    name: "谢宇恒",
+  })
+
+  assert(
+    objectMatchProperties(await db.getOrFail("users/xieyuheng"), {
+      name: "谢宇恒",
+      age: undefined,
+    }),
+  )
 })

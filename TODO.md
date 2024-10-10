@@ -1,7 +1,5 @@
 # fidb
 
-[fidb] crud.test.ts -- patch & put
-
 [fidb] `FiDb` -- `all`
 [fidb] `FiDb` -- `find`
 
