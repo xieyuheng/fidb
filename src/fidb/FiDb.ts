@@ -7,6 +7,7 @@ import type { JsonObject } from "../utils/Json.js"
 import { isErrnoException } from "../utils/node/isErrnoException.js"
 import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
+import { objectMergeProperties } from "../utils/objectMergeProperties.js"
 import { resolvePath } from "./resolvePath.js"
 
 export type FiDbConfig = {
@@ -91,10 +92,33 @@ export class FiDb implements Db {
   }
 
   async patch(id: Id, input: JsonObject): Promise<Data> {
-    throw new Error()
+    const found = await this.get(id)
+    if (!found) {
+      throw new NotFound(`Not found, id ${id}`)
+    }
+
+    const data = {
+      ...objectMergeProperties(found, input),
+      "@id": id,
+      "@updatedAt": Date.now(),
+      "@createdAt": found["@createdAt"],
+    }
+
+    await this.writeData(id, data)
+    return data
   }
 
   async put(id: Id, input: JsonObject): Promise<Data> {
-    throw new Error()
+    const found = await this.get(id)
+
+    const data = {
+      ...input,
+      "@id": id,
+      "@updatedAt": Date.now(),
+      "@createdAt": found? found["@createdAt"] : Date.now(),
+    }
+
+    await this.writeData(id, data)
+    return data
   }
 }
