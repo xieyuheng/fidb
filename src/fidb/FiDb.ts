@@ -78,7 +78,12 @@ export class FiDb implements Db {
   }
 
   async has(id: Id): Promise<boolean> {
-    throw new Error()
+    const data = await this.get(id)
+    if (data === undefined) {
+      return false
+    } else {
+      return true
+    }
   }
 
   async patch(id: Id, input: JsonObject): Promise<Data> {

@@ -1,7 +1,5 @@
 # fidb
 
-[fidb] `FiDb` -- `has`
-
 [fidb] crud.test.ts
 
 [fidb] `FiDb` -- `delete`
