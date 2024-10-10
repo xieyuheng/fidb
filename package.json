@@ -1,6 +1,6 @@
 {
   "name": "fidb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "repository": "github:fidb-official/fidb",
   "main": "./lib/index.js",
@@ -15,8 +15,7 @@
     "test:watch": "node --test --watch",
     "format": "prettier src --write"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^22.7.5",
     "prettier": "^3.3.3",
