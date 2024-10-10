@@ -1,3 +1,4 @@
+import fs from "node:fs/promises"
 import { join } from "path"
 import type { Data, Db, Id } from "../db/index.js"
 import { AlreadyExists } from "../errors/AlreadyExists.js"
@@ -7,7 +8,6 @@ import { isErrnoException } from "../utils/node/isErrnoException.js"
 import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
 import { resolvePath } from "./resolvePath.js"
-import fs from "node:fs/promises"
 
 export type FiDbConfig = {
   directory: string
