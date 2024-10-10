@@ -1,8 +1,5 @@
 # fidb
 
-[fidb] `FiDb` -- `writeData`
-
-[fidb] `FiDb` -- `create`
 [fidb] `FiDb` -- `delete`
 [fidb] `FiDb` -- `metadata`
 [fidb] `FiDb` -- `getOrFail`

@@ -11,7 +11,7 @@ export type Metadata = {
 export type Data = JsonObject & Metadata
 
 export interface Db {
-  create(id: Id, input: JsonObject): Promise<void>
+  create(id: Id, input: JsonObject): Promise<Data>
   delete(id: Id): Promise<void>
   getOrFail(id: Id): Promise<Data>
   get(id: Id): Promise<Data | undefined>
