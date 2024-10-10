@@ -1,11 +1,5 @@
-# tsdoc
-tsdoc
-
 # test
 tmp
-
-# for playing with the program
-play
 
 # typescript
 lib
@@ -30,6 +24,7 @@ node_modules
 
 # idea
 .idea
+
 # Local Netlify folder
 .netlify
 .vercel

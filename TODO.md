@@ -1,11 +1,11 @@
 # fidb
 
-[fidb] crud.test.ts
-
+[fidb] crud.test.ts -- create & get
 [fidb] `FiDb` -- `delete`
-
+[fidb] crud.test.ts -- delete
 [fidb] `FiDb` -- `patch`
 [fidb] `FiDb` -- `put`
+[fidb] crud.test.ts -- patch & put
 [fidb] `FiDb` -- `all`
 [fidb] `FiDb` -- `find`
 
