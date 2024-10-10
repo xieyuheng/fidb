@@ -1,6 +1,5 @@
 # fidb
 
-[fidb] `FiDb` -- `get`
 [fidb] `FiDb` -- `has`
 
 [fidb] crud.test.ts

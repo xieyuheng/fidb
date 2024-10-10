@@ -66,7 +66,15 @@ export class FiDb implements Db {
   }
 
   async get(id: Id): Promise<Data | undefined> {
-    throw new Error()
+    try {
+      return await this.getOrFail(id)
+    } catch (error) {
+      if (error instanceof NotFound) {
+        return undefined
+      }
+
+      throw error
+    }
   }
 
   async has(id: Id): Promise<boolean> {
