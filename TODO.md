@@ -1,7 +1,5 @@
 # fidb
 
-[fidb] `FiDb` -- `delete`
-[fidb] crud.test.ts -- delete
 [fidb] `FiDb` -- `patch`
 [fidb] `FiDb` -- `put`
 [fidb] crud.test.ts -- patch & put

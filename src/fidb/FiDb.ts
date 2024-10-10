@@ -7,6 +7,7 @@ import { isErrnoException } from "../utils/node/isErrnoException.js"
 import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
 import { resolvePath } from "./resolvePath.js"
+import fs from "node:fs/promises"
 
 export type FiDbConfig = {
   directory: string
@@ -50,7 +51,10 @@ export class FiDb implements Db {
   }
 
   async delete(id: Id): Promise<void> {
-    throw new Error()
+    await fs.rm(this.resolveIdPath(id), {
+      recursive: true,
+      force: true,
+    })
   }
 
   async getOrFail(id: Id): Promise<Data> {
