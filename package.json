@@ -2,7 +2,7 @@
   "name": "fidb",
   "version": "1.0.0",
   "type": "module",
-  "repository": "github:fidb-official/fidb-next",
+  "repository": "github:fidb-official/fidb",
   "main": "./lib/index.js",
   "files": [
     "src",
