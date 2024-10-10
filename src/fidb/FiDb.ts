@@ -115,7 +115,7 @@ export class FiDb implements Db {
       ...input,
       "@id": id,
       "@updatedAt": Date.now(),
-      "@createdAt": found? found["@createdAt"] : Date.now(),
+      "@createdAt": found ? found["@createdAt"] : Date.now(),
     }
 
     await this.writeData(id, data)
