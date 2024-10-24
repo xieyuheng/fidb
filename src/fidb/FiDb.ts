@@ -19,15 +19,12 @@ export class FiDb implements Db {
   constructor(public config: FiDbConfig) {}
 
   private resolveDatasetPath(datasetName: string): string {
-    return resolvePath(this.config.directory, join(datasetName, "datasets"))
+    return resolvePath(this.config.directory, datasetName)
   }
 
   private resolveDataPath(id: Id): string {
     const [datasetName, dataId] = id.split("/")
-    return resolvePath(
-      this.config.directory,
-      join(datasetName, "datasets", dataId),
-    )
+    return resolvePath(this.config.directory, join(datasetName, dataId))
   }
 
   private async writeData(id: Id, data: Data): Promise<void> {
