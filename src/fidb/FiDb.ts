@@ -126,11 +126,11 @@ export class FiDb implements Db {
     },
   ): AsyncIterable<Data> {
     try {
-      const dir = await fs.opendirfor
-
-      (this.resolve(prefix), {
+      const dir = await fs.opendir(this.resolve(prefix), {
         bufferSize: 1024, // default: 32
-      }) await (const dirEntry of dir) {
+      })
+
+      for await (const dirEntry of dir) {
         if (!dirEntry.isDirectory()) continue
 
         const path = `${prefix}/${dirEntry.name}`
