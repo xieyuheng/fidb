@@ -127,7 +127,7 @@ export class FiDb implements Db {
     return data
   }
 
-  async *all(
+  async *find(
     datasetName: string,
     options?: {
       properties: Record<string, Json>

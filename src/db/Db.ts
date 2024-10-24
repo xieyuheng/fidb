@@ -18,7 +18,7 @@ export interface Db {
   has(id: Id): Promise<boolean>
   patch(id: Id, input: JsonObject): Promise<Data>
   put(id: Id, input: JsonObject): Promise<Data>
-  all(
+  find(
     datasetName: string,
     options?: { properties: Record<string, Json> },
   ): AsyncIterable<Data>
