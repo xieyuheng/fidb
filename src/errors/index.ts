@@ -1,5 +1,2 @@
 export * from "./AlreadyExists.js"
 export * from "./NotFound.js"
-export * from "./Processing.js"
-export * from "./Unauthorized.js"
-export * from "./Unprocessable.js"

@@ -61,7 +61,13 @@ test("fidb / crud", async () => {
   })
 
   assert((await Array.fromAsync(db.all("users"))).length === 2)
-  assert((await Array.fromAsync(db.all("users", {
-    properties: { age: 200 }
-  }))).length === 1)
+  assert(
+    (
+      await Array.fromAsync(
+        db.all("users", {
+          properties: { age: 200 },
+        }),
+      )
+    ).length === 1,
+  )
 })
