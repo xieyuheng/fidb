@@ -1,9 +1,9 @@
 import fs from "node:fs/promises"
 import { join } from "path"
-import type { Data, Db, Id } from "../db/index.js"
+import type { Data, Db } from "../db/index.js"
 import { AlreadyExists } from "../errors/AlreadyExists.js"
 import { NotFound } from "../errors/NotFound.js"
-import type { Json, JsonObject } from "../utils/Json.js"
+import type { JsonObject } from "../utils/Json.js"
 import { isErrnoException } from "../utils/node/isErrnoException.js"
 import { readJsonObject } from "../utils/node/readJsonObject.js"
 import { writeJson } from "../utils/node/writeJson.js"
@@ -18,63 +18,58 @@ export type FiDbConfig = {
 export class FiDb implements Db {
   constructor(public config: FiDbConfig) {}
 
-  private resolveDatasetPath(datasetName: string): string {
-    return resolvePath(this.config.directory, datasetName)
+  private resolve(path: string): string {
+    return resolvePath(this.config.directory, path)
   }
 
-  private resolveDataPath(id: Id): string {
-    const [datasetName, dataId] = id.split("/")
-    return resolvePath(this.config.directory, join(datasetName, dataId))
+  private async writeData(path: string, data: Data): Promise<void> {
+    await writeJson(this.resolve(join(path, "index.json")), data)
   }
 
-  private async writeData(id: Id, data: Data): Promise<void> {
-    const path = join(this.resolveDataPath(id), "index.json")
-    await writeJson(path, data)
+  private async readData(path: string): Promise<Data> {
+    return (await readJsonObject(
+      this.resolve(join(path, "index.json")),
+    )) as Data
   }
 
-  private async readData(id: Id): Promise<Data> {
-    const path = join(this.resolveDataPath(id), "index.json")
-    return (await readJsonObject(path)) as Data
-  }
-
-  async create(id: Id, input: JsonObject): Promise<Data> {
-    if (await this.has(id)) {
-      throw new AlreadyExists(`Already exists, id: ${id}`)
+  async create(path: string, input: JsonObject): Promise<Data> {
+    if (await this.has(path)) {
+      throw new AlreadyExists(`Already exists, path: ${path}`)
     }
 
     const data = {
       ...input,
-      "@id": id,
+      "@path": path,
       "@createdAt": Date.now(),
       "@updatedAt": Date.now(),
     }
 
-    await this.writeData(id, data)
+    await this.writeData(path, data)
     return data
   }
 
-  async delete(id: Id): Promise<void> {
-    await fs.rm(this.resolveDataPath(id), {
+  async delete(path: string): Promise<void> {
+    await fs.rm(this.resolve(path), {
       recursive: true,
       force: true,
     })
   }
 
-  async getOrFail(id: Id): Promise<Data> {
+  async getOrFail(path: string): Promise<Data> {
     try {
-      return await this.readData(id)
+      return await this.readData(path)
     } catch (error) {
       if (isErrnoException(error) && error.code === "ENOENT") {
-        throw new NotFound(`id: ${id}`)
+        throw new NotFound(`path: ${path}`)
       }
 
       throw error
     }
   }
 
-  async get(id: Id): Promise<Data | undefined> {
+  async get(path: string): Promise<Data | undefined> {
     try {
-      return await this.getOrFail(id)
+      return await this.getOrFail(path)
     } catch (error) {
       if (error instanceof NotFound) {
         return undefined
@@ -84,8 +79,8 @@ export class FiDb implements Db {
     }
   }
 
-  async has(id: Id): Promise<boolean> {
-    const data = await this.get(id)
+  async has(path: string): Promise<boolean> {
+    const data = await this.get(path)
     if (data === undefined) {
       return false
     } else {
@@ -93,52 +88,54 @@ export class FiDb implements Db {
     }
   }
 
-  async patch(id: Id, input: JsonObject): Promise<Data> {
-    const found = await this.get(id)
+  async patch(path: string, input: JsonObject): Promise<Data> {
+    const found = await this.get(path)
     if (!found) {
-      throw new NotFound(`Not found, id ${id}`)
+      throw new NotFound(`Not found, id ${path}`)
     }
 
     const data = {
       ...objectMergeProperties(found, input),
-      "@id": id,
+      "@path": path,
       "@updatedAt": Date.now(),
       "@createdAt": found["@createdAt"],
     }
 
-    await this.writeData(id, data)
+    await this.writeData(path, data)
     return data
   }
 
-  async put(id: Id, input: JsonObject): Promise<Data> {
-    const found = await this.get(id)
+  async put(path: string, input: JsonObject): Promise<Data> {
+    const found = await this.get(path)
 
     const data = {
       ...input,
-      "@id": id,
+      "@path": path,
       "@updatedAt": Date.now(),
       "@createdAt": found ? found["@createdAt"] : Date.now(),
     }
 
-    await this.writeData(id, data)
+    await this.writeData(path, data)
     return data
   }
 
   async *find(
-    datasetName: string,
+    prefix: string,
     options?: {
-      properties: Record<string, Json>
+      properties: JsonObject
     },
   ): AsyncIterable<Data> {
     try {
-      const dir = await fs.opendir(this.resolveDatasetPath(datasetName), {
-        bufferSize: 1024, // default: 32
-      })
+      const dir = await fs.opendirfor
 
-      for await (const dirEntry of dir) {
+      (this.resolve(prefix), {
+        bufferSize: 1024, // default: 32
+      }) await (const dirEntry of dir) {
         if (!dirEntry.isDirectory()) continue
 
-        const data = await this.get(`${datasetName}/${dirEntry.name}`)
+        const path = `${prefix}/${dirEntry.name}`
+        const data = await this.get(path)
+
         if (
           data !== undefined &&
           objectMatchProperties(data, options?.properties || {})

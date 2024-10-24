@@ -1,9 +1,7 @@
-import type { Json, JsonObject } from "../utils/Json.js"
-
-export type Id = `${string}/${string}`
+import type { JsonObject } from "../utils/Json.js"
 
 export type Metadata = {
-  "@id": Id
+  "@path": string
   "@createdAt": number
   "@updatedAt": number
 }
@@ -11,15 +9,17 @@ export type Metadata = {
 export type Data = JsonObject & Metadata
 
 export interface Db {
-  create(id: Id, input: JsonObject): Promise<Data>
-  delete(id: Id): Promise<void>
-  getOrFail(id: Id): Promise<Data>
-  get(id: Id): Promise<Data | undefined>
-  has(id: Id): Promise<boolean>
-  patch(id: Id, input: JsonObject): Promise<Data>
-  put(id: Id, input: JsonObject): Promise<Data>
+  create(path: string, input: JsonObject): Promise<Data>
+  delete(path: string): Promise<void>
+  getOrFail(path: string): Promise<Data>
+  get(path: string): Promise<Data | undefined>
+  has(path: string): Promise<boolean>
+  patch(path: string, input: JsonObject): Promise<Data>
+  put(path: string, input: JsonObject): Promise<Data>
   find(
-    datasetName: string,
-    options?: { properties: Record<string, Json> },
+    prefix: string,
+    options?: {
+      properties: JsonObject
+    },
   ): AsyncIterable<Data>
 }
