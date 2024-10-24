@@ -31,12 +31,12 @@ export class FiDb implements Db {
   }
 
   private async writeData(id: Id, data: Data): Promise<void> {
-    const path = join(this.resolveDataPath(id), "data.json")
+    const path = join(this.resolveDataPath(id), "index.json")
     await writeJson(path, data)
   }
 
   private async readData(id: Id): Promise<Data> {
-    const path = join(this.resolveDataPath(id), "data.json")
+    const path = join(this.resolveDataPath(id), "index.json")
     return (await readJsonObject(path)) as Data
   }
 
