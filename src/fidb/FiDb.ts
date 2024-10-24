@@ -136,6 +136,8 @@ export class FiDb implements Db {
       })
 
       for await (const dirEntry of dir) {
+        if (!dirEntry.isDirectory()) continue
+
         const data = await this.get(`${datasetName}/${dirEntry.name}`)
         if (
           data !== undefined &&
