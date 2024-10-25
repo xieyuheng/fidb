@@ -1,4 +1,4 @@
-import type { Data } from "../schemas/index.js"
+import type { Data } from "../types/index.js"
 import type { JsonObject } from "../utils/Json.js"
 
 export interface Db {

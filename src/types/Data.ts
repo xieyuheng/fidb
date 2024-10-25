@@ -1,6 +1,6 @@
 import ty, { Schema } from "@xieyuheng/ty"
 import type { JsonObject } from "../utils/Json.js"
-import { MetadataSchema, type Metadata } from "./MetadataSchema.js"
+import { MetadataSchema, type Metadata } from "./Metadata.js"
 
 export type Data = JsonObject & Metadata
 
