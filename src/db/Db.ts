@@ -1,12 +1,5 @@
+import type { Data } from "../schemas/index.js"
 import type { JsonObject } from "../utils/Json.js"
-
-export type Metadata = {
-  "@path": string
-  "@createdAt": number
-  "@updatedAt": number
-}
-
-export type Data = JsonObject & Metadata
 
 export interface Db {
   create(path: string, input: JsonObject): Promise<Data>

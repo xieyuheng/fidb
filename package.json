@@ -17,7 +17,7 @@
     "format": "prettier src --write"
   },
   "dependencies": {
-    "@xieyuheng/ty": "^0.2.3"
+    "@xieyuheng/ty": "^0.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.9",
