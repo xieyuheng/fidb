@@ -1,2 +1,2 @@
-export * from "./AlreadyExists.js"
-export * from "./NotFound.js"
+export * from "./DataAlreadyExists.js"
+export * from "./DataNotFound.js"

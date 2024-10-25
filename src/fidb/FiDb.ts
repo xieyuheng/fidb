@@ -1,8 +1,8 @@
 import fs from "node:fs/promises"
 import { join } from "path"
 import type { Db } from "../db/index.js"
-import { AlreadyExists } from "../errors/AlreadyExists.js"
-import { NotFound } from "../errors/NotFound.js"
+import { DataAlreadyExists } from "../errors/DataAlreadyExists.js"
+import { DataNotFound } from "../errors/DataNotFound.js"
 import type { Data } from "../schemas/index.js"
 import type { JsonObject } from "../utils/Json.js"
 import { isErrnoException } from "../utils/node/isErrnoException.js"
@@ -35,7 +35,7 @@ export class FiDb implements Db {
 
   async create(path: string, input: JsonObject): Promise<Data> {
     if (await this.has(path)) {
-      throw new AlreadyExists(`Already exists, path: ${path}`)
+      throw new DataAlreadyExists(`Already exists, path: ${path}`)
     }
 
     const data = {
@@ -61,7 +61,7 @@ export class FiDb implements Db {
       return await this.readData(path)
     } catch (error) {
       if (isErrnoException(error) && error.code === "ENOENT") {
-        throw new NotFound(`path: ${path}`)
+        throw new DataNotFound(`path: ${path}`)
       }
 
       throw error
@@ -72,7 +72,7 @@ export class FiDb implements Db {
     try {
       return await this.getOrFail(path)
     } catch (error) {
-      if (error instanceof NotFound) {
+      if (error instanceof DataNotFound) {
         return undefined
       }
 
@@ -92,7 +92,7 @@ export class FiDb implements Db {
   async patch(path: string, input: JsonObject): Promise<Data> {
     const found = await this.get(path)
     if (!found) {
-      throw new NotFound(`Not found, id ${path}`)
+      throw new DataNotFound(`Not found, id ${path}`)
     }
 
     const data = {

@@ -1,4 +1,4 @@
-export class AlreadyExists extends Error {
+export class DataNotFound extends Error {
   constructor(message: string) {
     super(message)
   }
