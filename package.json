@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "type": "module",
   "repository": "github:fidb-official/fidb",
+  "license": "GPL-3.0-or-later",
   "main": "./lib/index.js",
   "files": [
     "src",
@@ -15,12 +16,13 @@
     "test:watch": "node --test --watch",
     "format": "prettier src --write"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@xieyuheng/ty": "^0.2.3"
+  },
   "devDependencies": {
     "@types/node": "^22.7.9",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "^5.6.3"
-  },
-  "license": "GPL-3.0-or-later"
+  }
 }
