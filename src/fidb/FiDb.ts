@@ -19,7 +19,7 @@ export type FiDbConfig = {
 export class FiDb implements Db {
   constructor(public config: FiDbConfig) {}
 
-  private resolve(path: string): string {
+  resolve(path: string): string {
     return resolvePath(this.config.directory(), path)
   }
 
