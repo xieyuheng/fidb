@@ -13,14 +13,14 @@ import { objectMergeProperties } from "../utils/objectMergeProperties.js"
 import { resolvePath } from "./resolvePath.js"
 
 export type FiDbConfig = {
-  directory: string
+  directory: () => string
 }
 
 export class FiDb implements Db {
   constructor(public config: FiDbConfig) {}
 
   private resolve(path: string): string {
-    return resolvePath(this.config.directory, path)
+    return resolvePath(this.config.directory(), path)
   }
 
   private async writeData(path: string, data: Data): Promise<void> {

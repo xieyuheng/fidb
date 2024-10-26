@@ -12,5 +12,5 @@ export async function createTestFiDb(): Promise<FiDb> {
   const basename = slug(`${time}-${randomHexString(4)}`)
   const directory = resolve(PREFIX, basename)
   await fs.mkdir(directory, { recursive: true })
-  return new FiDb({ directory })
+  return new FiDb({ directory: () => directory })
 }
