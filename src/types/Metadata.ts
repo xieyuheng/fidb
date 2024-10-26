@@ -1,4 +1,4 @@
-import ty, { Schema } from "@xieyuheng/ty"
+import { z, ZodType } from "zod"
 
 export type Metadata = {
   "@path": string
@@ -6,8 +6,8 @@ export type Metadata = {
   "@updatedAt": number
 }
 
-export const MetadataSchema: Schema<Metadata> = ty.object({
-  "@path": ty.string(),
-  "@createdAt": ty.number(),
-  "@updatedAt": ty.number(),
+export const MetadataSchema: ZodType<Metadata> = z.object({
+  "@path": z.string(),
+  "@createdAt": z.number(),
+  "@updatedAt": z.number(),
 })
