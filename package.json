@@ -2,7 +2,7 @@
   "name": "fidb",
   "version": "1.0.8",
   "type": "module",
-  "repository": "github:fidb-official/fidb",
+  "repository": "github:xieyuheng/fidb",
   "license": "GPL-3.0-or-later",
   "main": "./lib/index.js",
   "files": [
