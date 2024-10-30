@@ -1,4 +1,4 @@
-import fs from "node:fs/promises"
+import fs from "node:fs"
 import { resolve } from "node:path"
 import { formatDateTime } from "../utils/formatDate.js"
 import { randomHexString } from "../utils/randomHexString.js"
@@ -11,6 +11,6 @@ export async function createTestFiDb(): Promise<FiDb> {
   const time = formatDateTime(Date.now())
   const basename = slug(`${time}-${randomHexString(4)}`)
   const directory = resolve(PREFIX, basename)
-  await fs.mkdir(directory, { recursive: true })
+  await fs.promises.mkdir(directory, { recursive: true })
   return new FiDb({ directory: () => directory })
 }

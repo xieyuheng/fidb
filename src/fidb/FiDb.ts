@@ -1,4 +1,4 @@
-import fs from "node:fs/promises"
+import fs from "node:fs"
 import { join } from "path"
 import type { Db } from "../db/index.js"
 import { DataAlreadyExists } from "../errors/DataAlreadyExists.js"
@@ -50,7 +50,7 @@ export class FiDb implements Db {
   }
 
   async delete(path: string): Promise<void> {
-    await fs.rm(this.resolve(path), {
+    await fs.promises.rm(this.resolve(path), {
       recursive: true,
       force: true,
     })
@@ -127,7 +127,7 @@ export class FiDb implements Db {
     },
   ): AsyncIterable<Data> {
     try {
-      const dir = await fs.opendir(this.resolve(prefix), {
+      const dir = await fs.promises.opendir(this.resolve(prefix), {
         bufferSize: 1024, // default: 32
       })
 
