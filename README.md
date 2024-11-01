@@ -1,6 +1,6 @@
 # FiDB
 
-This is a Node.js implementation of [**FiDB**](https://fidb.app)
+This is a Node.js implementation of [**FiDB**](https://fidb.xieyuheng.com)
 -- a suite of protocols to use file system as database.
 
 ## Development
