@@ -1,16 +1,16 @@
 import fs from "node:fs"
 import { join } from "path"
-import type { Db } from "../db/index.js"
-import { DataAlreadyExists } from "../errors/DataAlreadyExists.js"
-import { DataNotFound } from "../errors/DataNotFound.js"
-import type { Data } from "../types/index.js"
-import type { JsonObject } from "../utils/Json.js"
-import { isErrnoException } from "../utils/node/isErrnoException.js"
-import { readJsonObject } from "../utils/node/readJsonObject.js"
-import { writeJson } from "../utils/node/writeJson.js"
-import { objectMatchProperties } from "../utils/objectMatchProperties.js"
-import { objectMergeProperties } from "../utils/objectMergeProperties.js"
-import { resolvePath } from "./resolvePath.js"
+import type { Db } from "../db/index.ts"
+import { DataAlreadyExists } from "../errors/DataAlreadyExists.ts"
+import { DataNotFound } from "../errors/DataNotFound.ts"
+import type { Data } from "../types/index.ts"
+import type { JsonObject } from "../utils/Json.ts"
+import { isErrnoException } from "../utils/node/isErrnoException.ts"
+import { readJsonObject } from "../utils/node/readJsonObject.ts"
+import { writeJson } from "../utils/node/writeJson.ts"
+import { objectMatchProperties } from "../utils/objectMatchProperties.ts"
+import { objectMergeProperties } from "../utils/objectMergeProperties.ts"
+import { resolvePath } from "./resolvePath.ts"
 
 export type FiDbConfig = {
   directory: () => string
@@ -24,12 +24,12 @@ export class FiDb implements Db {
   }
 
   private async writeData(path: string, data: Data): Promise<void> {
-    await writeJson(this.resolve(join(path, "index.json")), data)
+    await writeJson(this.resolve(join(path, "index.tson")), data)
   }
 
   private async readData(path: string): Promise<Data> {
     return (await readJsonObject(
-      this.resolve(join(path, "index.json")),
+      this.resolve(join(path, "index.tson")),
     )) as Data
   }
 

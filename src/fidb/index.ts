@@ -1,1 +1,1 @@
-export * from "./FiDb.js"
+export * from "./FiDb.ts"

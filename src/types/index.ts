@@ -1,2 +1,2 @@
-export * from "./Data.js"
-export * from "./Metadata.js"
+export * from "./Data.ts"
+export * from "./Metadata.ts"

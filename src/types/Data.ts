@@ -1,6 +1,6 @@
 import { z, ZodType } from "zod"
-import type { JsonObject } from "../utils/Json.js"
-import { MetadataSchema, type Metadata } from "./Metadata.js"
+import type { JsonObject } from "../utils/Json.ts"
+import { MetadataSchema, type Metadata } from "./Metadata.ts"
 
 export type Data = JsonObject & Metadata
 

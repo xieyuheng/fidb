@@ -1,6 +1,6 @@
 import assert from "node:assert"
 import { test } from "node:test"
-import { objectMergeProperties } from "./objectMergeProperties.js"
+import { objectMergeProperties } from "./objectMergeProperties.ts"
 
 test("objectMergeProperties", () => {
   assert.deepStrictEqual(

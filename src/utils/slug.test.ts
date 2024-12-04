@@ -1,6 +1,6 @@
 import assert from "node:assert"
 import { test } from "node:test"
-import { slug } from "./slug.js"
+import { slug } from "./slug.ts"
 
 // prettier-ignore
 test("slug", () => {

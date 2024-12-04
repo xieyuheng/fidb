@@ -1,7 +1,7 @@
 import assert from "node:assert"
 import { test } from "node:test"
-import { objectMatchProperties } from "../utils/objectMatchProperties.js"
-import { createTestFiDb } from "./createTestFiDb.js"
+import { objectMatchProperties } from "../utils/objectMatchProperties.ts"
+import { createTestFiDb } from "./createTestFiDb.ts"
 
 test("fidb / crud", async () => {
   const db = await createTestFiDb()

@@ -1,5 +1,5 @@
-import type { Data } from "../types/index.js"
-import type { JsonObject } from "../utils/Json.js"
+import type { Data } from "../types/index.ts"
+import type { JsonObject } from "../utils/Json.ts"
 
 export interface Db {
   create(path: string, input: JsonObject): Promise<Data>

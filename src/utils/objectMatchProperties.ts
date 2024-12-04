@@ -1,4 +1,4 @@
-import { type JsonObject, isJsonArray, isJsonObject } from "./Json.js"
+import { type JsonObject, isJsonArray, isJsonObject } from "./Json.ts"
 
 export function objectMatchProperties(
   target: JsonObject,
